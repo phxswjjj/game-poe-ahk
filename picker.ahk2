@@ -1,0 +1,17 @@
+
+OutputLog(msg)
+{
+    OutputDebug(msg)
+    OutputDebug("`n")
+}
+
+; Control+Alt+Z hotkey.
+^!z::
+{
+    MouseGetPos(&MouseX, &MouseY)
+    ; MouseX := 98
+    ; MouseY := 925
+    ; MouseMove(MouseX, MouseY)
+    color := PixelGetColor(MouseX, MouseY)
+    OutputLog("The color at the current cursor position (" MouseX ", " MouseY ") is " color)
+}

@@ -1,0 +1,164 @@
+AppTitle := "Path of Exile"
+UniqueID := WinExist(AppTitle)
+if not UniqueID {
+    OutputLog("[" AppTitle "] not found")
+    Return
+}
+
+Key1ElcapedMSec := 9999
+Key2ElcapedMSec := 9999
+Key3ElcapedMSec := 9999
+Key4ElcapedMSec := 9999
+Key5ElcapedMSec := 9999
+KeyDElcapedMSec := 9999
+KeyQElcapedMSec := 9999
+SetTimer Counter, 100
+
+SetTimer LifeMonitor, 200
+
+SetTimer SendSkill, 100
+
+Return
+
+Counter()
+{
+    global UniqueID
+    global Key1ElcapedMSec
+    global Key2ElcapedMSec
+    global Key3ElcapedMSec
+    global Key4ElcapedMSec
+    global Key5ElcapedMSec
+    global KeyDElcapedMSec
+    global KeyQElcapedMSec
+
+    If !WinExist("ahk_id " UniqueID)
+    {
+        OutputLog("Stopped")
+        ExitApp
+    }
+    Key1ElcapedMSec := Min(Key1ElcapedMSec + 100, 10000)
+    Key2ElcapedMSec := Min(Key2ElcapedMSec + 100, 10000)
+    Key3ElcapedMSec := Min(Key3ElcapedMSec + 100, 10000)
+    Key4ElcapedMSec := Min(Key4ElcapedMSec + 100, 10000)
+    Key5ElcapedMSec := Min(Key5ElcapedMSec + 100, 10000)
+    KeyDElcapedMSec := Min(KeyDElcapedMSec + 100, 10000)
+    KeyQElcapedMSec := Min(KeyQElcapedMSec + 100, 10000)
+}
+
+LifeMonitor()
+{
+    global UniqueID
+    global Key1ElcapedMSec
+    global Key2ElcapedMSec
+    global Key3ElcapedMSec
+    global Key4ElcapedMSec
+    global Key5ElcapedMSec
+    global KeyDElcapedMSec
+    global KeyQElcapedMSec
+
+    If !WinActive("ahk_id " UniqueID)
+    {
+        Return
+    }
+
+
+    if PixelSearch(&Px, &Py, 98, 925, 100, 915, 0xA31926, 3) {
+        Return
+    }
+
+    ; color := PixelGetColor(Px, Py)
+    ; OutputLog(color)
+
+    if Key2ElcapedMSec >= 8000
+    {
+        Key2ElcapedMSec := 0
+        Send(2)
+        Sleep(500)
+    }
+    else if Key3ElcapedMSec >= 7000
+    {
+        Key3ElcapedMSec := 0
+        Send(3)
+        Sleep(500)
+    }
+    else if Key4ElcapedMSec >= 6000
+    {
+        Key4ElcapedMSec := 0
+        Send(4)
+        Sleep(500)
+    }
+    else if Key5ElcapedMSec >= 5000
+    {
+        Key5ElcapedMSec := 0
+        ; Send(5)
+        Sleep(500)
+    }
+    else if Key1ElcapedMSec >= 5000
+    {
+        Key1ElcapedMSec := 0
+        Send(1)
+        Sleep(500)
+    }
+}
+
+SendSkill()
+{
+    global UniqueID
+    global Key1ElcapedMSec
+    global Key2ElcapedMSec
+    global Key3ElcapedMSec
+    global Key4ElcapedMSec
+    global Key5ElcapedMSec
+    global KeyDElcapedMSec
+    global KeyQElcapedMSec
+
+    If !WinActive("ahk_id " UniqueID)
+    {
+        Return
+    }
+
+    If GetKeyState("VKC0", "P") or GetKeyState("RButton", "P")
+    {
+        If KeyQElcapedMSec >= 1900
+        {
+            KeyQElcapedMSec := 0
+            ; Send("q")
+        }
+    }
+}
+
+OutputLog(msg)
+{
+    timeStr := FormatTime(, "hh:mm:ss")
+    OutputDebug("[" timeStr "] " msg)
+}
+
+
+~RButton up::
+{
+    global UniqueID
+    global Key1ElcapedMSec
+    global Key2ElcapedMSec
+    global Key3ElcapedMSec
+    global Key4ElcapedMSec
+    global Key5ElcapedMSec
+    global KeyDElcapedMSec
+    global KeyQElcapedMSec
+
+    If !WinActive("ahk_id " UniqueID)
+    {
+        Return
+    }
+
+    If KeyDElcapedMSec >= 200
+    {
+        KeyDElcapedMSec := 0
+    }
+}
+
+^!z:: ; Control+Alt+Z hotkey.
+{
+    OutputLog("Z pressed")
+    OutputLog("Stopped")
+    ExitApp
+}
