@@ -10,6 +10,7 @@ if not UniqueID {
 }
 
 SetTimer LifeMonitor, 200
+SetTimer ManaMonitor, 300
 
 SetTimer SendSkill, 100
 
@@ -31,6 +32,29 @@ LifeMonitor()
     ; OutputLog(color)
 
     for setting in LifeFlaskSettings {
+        if setting.Fire() {
+            Send(setting.KeyChar)
+            Sleep(500)
+            break
+        }
+    }
+}
+
+ManaMonitor() {
+    If not WinActive("ahk_id " UniqueID)
+    {
+        Return
+    }
+
+
+    if PixelSearch(&Px, &Py, 1770, 1050, 1775, 1052, 0x111F43, 3) {
+        Return
+    }
+
+    ; color := PixelGetColor(Px, Py)
+    ; OutputLog(color)
+
+    for setting in ManaFlaskSettings {
         if setting.Fire() {
             Send(setting.KeyChar)
             Sleep(500)
