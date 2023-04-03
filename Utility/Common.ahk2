@@ -3,5 +3,5 @@
 OutputLog(msg)
 {
     timeStr := FormatTime(, "hh:mm:ss")
-    OutputDebug("[" timeStr "] " msg)
+    OutputDebug("[" timeStr "] " msg "`n")
 }

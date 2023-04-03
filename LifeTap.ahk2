@@ -9,57 +9,14 @@ if not UniqueID {
     ExitApp
 }
 
-Key1ElcapedMSec := 9999
-Key2ElcapedMSec := 9999
-Key3ElcapedMSec := 9999
-Key4ElcapedMSec := 9999
-Key5ElcapedMSec := 9999
-KeyDElcapedMSec := 9999
-KeyQElcapedMSec := 9999
-SetTimer Counter, 100
-
 SetTimer LifeMonitor, 200
 
 SetTimer SendSkill, 100
 
 Return
 
-Counter()
-{
-    global UniqueID
-    global Key1ElcapedMSec
-    global Key2ElcapedMSec
-    global Key3ElcapedMSec
-    global Key4ElcapedMSec
-    global Key5ElcapedMSec
-    global KeyDElcapedMSec
-    global KeyQElcapedMSec
-
-    If not WinExist("ahk_id " UniqueID)
-    {
-        OutputLog("Stopped")
-        ExitApp
-    }
-    Key1ElcapedMSec := Min(Key1ElcapedMSec + 100, 10000)
-    Key2ElcapedMSec := Min(Key2ElcapedMSec + 100, 10000)
-    Key3ElcapedMSec := Min(Key3ElcapedMSec + 100, 10000)
-    Key4ElcapedMSec := Min(Key4ElcapedMSec + 100, 10000)
-    Key5ElcapedMSec := Min(Key5ElcapedMSec + 100, 10000)
-    KeyDElcapedMSec := Min(KeyDElcapedMSec + 100, 10000)
-    KeyQElcapedMSec := Min(KeyQElcapedMSec + 100, 10000)
-}
-
 LifeMonitor()
 {
-    global UniqueID
-    global Key1ElcapedMSec
-    global Key2ElcapedMSec
-    global Key3ElcapedMSec
-    global Key4ElcapedMSec
-    global Key5ElcapedMSec
-    global KeyDElcapedMSec
-    global KeyQElcapedMSec
-
     If not WinActive("ahk_id " UniqueID)
     {
         Return
@@ -73,49 +30,17 @@ LifeMonitor()
     ; color := PixelGetColor(Px, Py)
     ; OutputLog(color)
 
-    if Key2ElcapedMSec >= 8000
-    {
-        Key2ElcapedMSec := 0
-        Send(2)
-        Sleep(500)
-    }
-    else if Key3ElcapedMSec >= 7000
-    {
-        Key3ElcapedMSec := 0
-        Send(3)
-        Sleep(500)
-    }
-    else if Key4ElcapedMSec >= 6000
-    {
-        Key4ElcapedMSec := 0
-        Send(4)
-        Sleep(500)
-    }
-    else if Key5ElcapedMSec >= 5000
-    {
-        Key5ElcapedMSec := 0
-        ; Send(5)
-        Sleep(500)
-    }
-    else if Key1ElcapedMSec >= 5000
-    {
-        Key1ElcapedMSec := 0
-        Send(1)
-        Sleep(500)
+    for setting in LifeFlaskSettings {
+        if setting.Fire() {
+            Send(setting.KeyChar)
+            Sleep(500)
+            break
+        }
     }
 }
 
 SendSkill()
 {
-    global UniqueID
-    global Key1ElcapedMSec
-    global Key2ElcapedMSec
-    global Key3ElcapedMSec
-    global Key4ElcapedMSec
-    global Key5ElcapedMSec
-    global KeyDElcapedMSec
-    global KeyQElcapedMSec
-
     If !WinActive("ahk_id " UniqueID)
     {
         Return
@@ -123,10 +48,11 @@ SendSkill()
 
     If GetKeyState("VKC0", "P") or GetKeyState("RButton", "P")
     {
-        If KeyQElcapedMSec >= 8000
-        {
-            KeyQElcapedMSec := 0
-            Send("q")
+        for setting in SkillSettings {
+            if setting.Fire() {
+                Send(setting.KeyChar)
+                break
+            }
         }
     }
 }
@@ -134,23 +60,16 @@ SendSkill()
 
 ~RButton up::
 {
-    global UniqueID
-    global Key1ElcapedMSec
-    global Key2ElcapedMSec
-    global Key3ElcapedMSec
-    global Key4ElcapedMSec
-    global Key5ElcapedMSec
-    global KeyDElcapedMSec
-    global KeyQElcapedMSec
-
     If not WinActive("ahk_id " UniqueID)
     {
         Return
     }
 
-    If KeyDElcapedMSec >= 200
-    {
-        KeyDElcapedMSec := 0
+    for setting in RSkillSettings {
+        if setting.Fire() {
+            Send(setting.KeyChar)
+            break
+        }
     }
 }
 

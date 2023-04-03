@@ -1,0 +1,24 @@
+
+class SendKeyMapping {
+
+    __New(keyChar, intervalMs) {
+        this.KeyChar := keyChar
+        this.IntervalMs := intervalMs
+        this.NextFireTime := A_TickCount
+    }
+
+    Fire() {
+        if A_TickCount >= this.NextFireTime {
+            this.NextFireTime := A_TickCount + this.IntervalMs
+            return true
+        } else {
+            return false
+        }
+    }
+}
+
+LifeFlaskSettings := Array()
+ManaFlaskSettings := Array()
+FuncFlaskSettings := Array()
+SkillSettings := Array()
+RSkillSettings := Array()

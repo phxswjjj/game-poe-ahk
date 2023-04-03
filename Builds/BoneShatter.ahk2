@@ -1,0 +1,10 @@
+#Include BuildCommon.ahk2
+
+LifeFlaskSettings.Push(SendKeyMapping("1", 10000))
+LifeFlaskSettings.Push(SendKeyMapping("2", 8000))
+LifeFlaskSettings.Push(SendKeyMapping("3", 7000))
+LifeFlaskSettings.Push(SendKeyMapping("4", 6000))
+
+SkillSettings.Push(SendKeyMapping("q", 8000))
+
+; RSkillSettings.Push(SendKeyMapping("d", 200))
