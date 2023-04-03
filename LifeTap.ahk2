@@ -1,8 +1,12 @@
-AppTitle := "Path of Exile"
-UniqueID := WinExist(AppTitle)
+#Include %A_ScriptDir%\Utility\Common.ahk2
+
+#Include %A_ScriptDir%\Builds\BoneShatter.ahk2
+
+AppExe := "PathOfExile.exe"
+UniqueID := WinExist("ahk_exe " AppExe)
 if not UniqueID {
-    OutputLog("[" AppTitle "] not found")
-    Return
+    OutputLog("[" AppExe "] not found")
+    ExitApp
 }
 
 Key1ElcapedMSec := 9999
@@ -31,7 +35,7 @@ Counter()
     global KeyDElcapedMSec
     global KeyQElcapedMSec
 
-    If !WinExist("ahk_id " UniqueID)
+    If not WinExist("ahk_id " UniqueID)
     {
         OutputLog("Stopped")
         ExitApp
@@ -56,7 +60,7 @@ LifeMonitor()
     global KeyDElcapedMSec
     global KeyQElcapedMSec
 
-    If !WinActive("ahk_id " UniqueID)
+    If not WinActive("ahk_id " UniqueID)
     {
         Return
     }
@@ -119,18 +123,12 @@ SendSkill()
 
     If GetKeyState("VKC0", "P") or GetKeyState("RButton", "P")
     {
-        If KeyQElcapedMSec >= 1900
+        If KeyQElcapedMSec >= 8000
         {
             KeyQElcapedMSec := 0
-            ; Send("q")
+            Send("q")
         }
     }
-}
-
-OutputLog(msg)
-{
-    timeStr := FormatTime(, "hh:mm:ss")
-    OutputDebug("[" timeStr "] " msg)
 }
 
 
@@ -145,7 +143,7 @@ OutputLog(msg)
     global KeyDElcapedMSec
     global KeyQElcapedMSec
 
-    If !WinActive("ahk_id " UniqueID)
+    If not WinActive("ahk_id " UniqueID)
     {
         Return
     }
