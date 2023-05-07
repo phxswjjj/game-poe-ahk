@@ -1,6 +1,6 @@
 #Include %A_ScriptDir%\Utility\Common.ahk2
 
-; #Include %A_ScriptDir%\Builds\BoneShatter.ahk2
+; #Include %A_ScriptDir%\Builds\LightArrow.ahk2
 #Include %A_ScriptDir%\Builds\ToxicRain.ahk2
 
 AppExe := "PathOfExile.exe"
@@ -36,7 +36,7 @@ LifeMonitor()
     for setting in LifeFlaskSettings {
         if setting.Fire() {
             Send(setting.KeyChar)
-            Sleep(1000)
+            Sleep(200)
             break
         }
     }
@@ -74,9 +74,11 @@ FuncFlaskJob() {
     If GetKeyState("VKC0", "P") or GetKeyState("RButton", "P")
     {
         for setting in FuncFlaskSettings {
+            if not GetKeyState("VKC0", "P") and not GetKeyState("RButton", "P")
+                continue
             if setting.Fire() {
                 Send(setting.KeyChar)
-                Sleep(1000)
+                Sleep(200)
             }
         }
     }

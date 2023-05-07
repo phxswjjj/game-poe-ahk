@@ -1,0 +1,11 @@
+#Include BuildCommon.ahk2
+
+LifeFlaskSettings.Push(SendKeyMapping("1", 5200))
+LifeFlaskSettings.Push(SendKeyMapping("2", 4000))
+LifeFlaskSettings.Push(SendKeyMapping("3", 4000))
+; LifeFlaskSettings.Push(SendKeyMapping("4", 4000))
+
+FuncFlaskSettings.Push(SendKeyMapping("4", 12000))
+
+; ManaFlaskSettings.Push(SendKeyMapping("4", 4000))
+ManaFlaskSettings.Push(SendKeyMapping("5", 4000))
