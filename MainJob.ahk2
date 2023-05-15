@@ -1,7 +1,4 @@
-#Include %A_ScriptDir%\Utility\Common.ahk2
-
-; #Include %A_ScriptDir%\Builds\LightArrow.ahk2
-#Include %A_ScriptDir%\Builds\ToxicRain.ahk2
+#Include ./Utility/Common.ahk2
 
 AppExe := "PathOfExile.exe"
 UniqueID := WinExist("ahk_exe " AppExe)
@@ -9,6 +6,7 @@ if not UniqueID {
     OutputLog("[" AppExe "] not found")
     ExitApp
 }
+OutputLog("[" AppExe "] found [" UniqueID "]")
 
 SetTimer LifeMonitor, 200
 SetTimer ManaMonitor, 300

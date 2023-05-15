@@ -9,4 +9,4 @@ ManaFlaskSettings.Push(SendKeyMapping("5", 5000))
 
 SkillSettings.Push(SendKeyMapping("q", 8000))
 
-; RSkillSettings.Push(SendKeyMapping("d", 200))
+#Include ../MainJob.ahk2
