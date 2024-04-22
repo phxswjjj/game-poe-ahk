@@ -17,6 +17,22 @@ class SendKeyMapping {
     }
 }
 
+
+class MinesSkillSetting extends SendKeyMapping {
+    __New() {
+        super.__New("d", 1000)
+    }
+
+    Fire() {
+        if GetKeyState("RButton", "P") {
+            return false
+        } else {
+            return super.Fire()
+        }
+    }
+}
+
+
 LifeFlaskSettings := Array()
 ManaFlaskSettings := Array()
 FuncFlaskSettings := Array()

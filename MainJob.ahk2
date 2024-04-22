@@ -1,6 +1,6 @@
 #Include ./Utility/Common.ahk2
 
-AppExe := "PathOfExile.exe"
+AppExe := "PathOfExileSteam.exe"
 UniqueID := WinExist("ahk_exe " AppExe)
 if not UniqueID {
     OutputLog("[" AppExe "] not found")
@@ -16,8 +16,7 @@ SetTimer SendSkill, 100
 
 Return
 
-LifeMonitor()
-{
+LifeMonitor() {
     If not WinActive("ahk_id " UniqueID)
     {
         Return
@@ -28,13 +27,10 @@ LifeMonitor()
         Return
     }
 
-    ; color := PixelGetColor(Px, Py)
-    ; OutputLog(color)
-
     for setting in LifeFlaskSettings {
         if setting.Fire() {
             Send(setting.KeyChar)
-            Sleep(200)
+            Sleep(500)
             break
         }
     }
@@ -50,9 +46,6 @@ ManaMonitor() {
     if PixelSearch(&Px, &Py, 1770, 1050, 1775, 1052, 0x111F43, 3) {
         Return
     }
-
-    ; color := PixelGetColor(Px, Py)
-    ; OutputLog(color)
 
     for setting in ManaFlaskSettings {
         if setting.Fire() {
